@@ -23,6 +23,7 @@ module.exports = {
     detailPage : async (req,res)=>{
         try {
             const {id} = req.params;
+            const payment =  await Payment.find();
             const voucher = await Voucher.findOne({_id: id})
             .populate('category')
             .populate('nominals')
@@ -32,7 +33,10 @@ module.exports = {
             if(!voucher){
                 res.status(404).json({ message: "Data Voucher Tidak ditemukan" });
             }
-            res.status(200).json({ data: voucher });
+            res.status(200).json({detail : {
+                data: voucher,
+                payment: payment
+            }  });
         } catch (error) {
             res.status(500).json({message: error.message || 'internal server error'})
         }
