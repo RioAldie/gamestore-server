@@ -20,6 +20,10 @@ let voucherScheme = mongoose.Schema({
        type: mongoose.Schema.Types.ObjectId,
        ref: 'Nominal'
    }],
+   payments : [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Payment'
+   }],
    user: {
        type: mongoose.Schema.Types.ObjectId,
        ref: 'Users'
